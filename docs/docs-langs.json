@@ -4,6 +4,12 @@
       "DisplayName" : "English",
       "Code" : "en",
       "IsDefault": true
+    },
+{
+      "DisplayName" : "中文",
+      "Code" : "zh-CN",
+      "IsDefault": false
     }
+
   ]
 }
