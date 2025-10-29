@@ -1,15 +1,16 @@
 {
-  "name": "company",
-  "displayName": "Abp帮助",
   "items": [
     {
+      "text": "Get Started",
+      "items": [
+        {
           "text": "Overview",
-          "path": "get-started",
+          "path": "index.md",
           "isIndex": true
         },
-    {
-      "text": "FAQ",
-      "path": "faq.md"
-    }
+        {
+          "text": "Single Layer Web Application",
+          "path": "tools2.md"
+        },
   ]
 }
