@@ -1,8 +1,4 @@
-{
-  "items": [
-    {
-      "text": "Get Started",
-      "items": [
+ "items": [
         {
           "text": "Overview",
           "path": "index.md",
@@ -14,5 +10,3 @@
         }
       ]
     }
-  ]
-}
