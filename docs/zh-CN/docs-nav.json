@@ -3,9 +3,10 @@
   "displayName": "Abp帮助",
   "items": [
     {
-      "text": "快速开始",
-      "path": "index.md"
-    },
+          "text": "Overview",
+          "path": "get-started",
+          "isIndex": true
+        },
     {
       "text": "FAQ",
       "path": "faq.md"
