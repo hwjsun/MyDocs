@@ -35,6 +35,10 @@
         {
           "text": "AngularABP",
           "path": "AbpUI/AngularABP.md"
+        },
+        {
+          "text": "编译",
+          "path": "AbpUI/Vben对接开发文档.md"
         }
       ]
     }
