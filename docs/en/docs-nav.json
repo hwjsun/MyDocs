@@ -33,16 +33,16 @@
       "path": "AbpUI",
       "items": [
         {
-          "text": "Angular-ABP",
-          "path": "AbpUI/Angular-ABP.md"
+          "text": "AngularABP",
+          "path": "AbpUI/AngularABP.md"
         },
         {
           "text": "编译",
-          "path": "AbpUI/Arco-ABP.md"
+          "path": "AbpUI/ArcoABP.md"
         },
         {
           "text": "编译",
-          "path": "AbpUI/Vben-ABP.md"
+          "path": "AbpUI/VbenABP.md"
         }
       ]
     }
