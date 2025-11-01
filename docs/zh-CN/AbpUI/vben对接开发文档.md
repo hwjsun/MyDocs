@@ -18,11 +18,50 @@ Vue-Vben-Admin v5（域名：https://vben.neibuguanli.cn），完整对接ABP后
 
 #### 1、用户认证流程
 
-![img](https://cdn.nlark.com/yuque/__mermaid_v3/77b0e57da734129217a8a8ee2981c347.svg)
+<pre>
+```mermaid
+graph TD
+    用户 -->|①需要认证| Vben后台站点
+    Vben后台站点 -->|②重定向| 认证服务Oidc站点
+    认证服务Oidc站点 -->|③授权码| Vben后台站点
+    Vben后台站点 -->|④授权码| 用户
+    Vben后台站点 -->|请求令牌| 认证服务Oidc站点
+    认证服务Oidc站点 -->|ID和访问令牌| Vben后台站点
+    Vben后台站点 -->|验证| HTTPAPI
+    HTTPAPI -->|数据读写| 数据库
+    ```
+</pre>
 
 #### 2、前端交互流程
 
-![img](https://cdn.nlark.com/yuque/__mermaid_v3/42dbf5dbdd194b0e8f2300eb9c868264.svg)
+<pre>
+```mermaid
+graph TD
+    A(首次访问 https://vue.neibuguanli.cn)
+    B{本地存在token}
+    B -- 无 --> C(跳转到OIDC登录中心)
+    B -- 有 --> D(进入系统)
+
+    C --> E(输入账密 选择租户 选择语言)
+    E --> F(验证成功)
+    F --> G(携带授权码回到 signin-oidc)
+    G --> H(前端用授权码换access_token)
+    H --> I(存入localStorage与cookie)
+    I --> D
+    
+    D --> J(调用业务API)
+    J --> K(自动带Authorization Bearer token 租户头 语言头)
+    K --> L{返回状态}
+    L -- 200 --> M(渲染页面)
+    L -- 401 --> N(用refresh_token换新token)
+    N --> J
+    
+    O(点击退出) --> P(清除本地token)
+    P --> Q(跳转登录中心注销)
+    Q --> R(返回首页)
+    R --> A
+    ```
+</pre>
 
 
 
@@ -46,7 +85,43 @@ const oAuthConfig = {
 };
 ```
 
-![img](https://cdn.nlark.com/yuque/__mermaid_v3/e8cf4d2f4099d8f12233ac831ea86adc.svg)
+<pre>
+```mermaid
+graph TD
+    %% 颜色标记：绿色=成功，红色=失败/异常，灰色=可选
+    A[用户访问 https://vue.neibuguanli.cn] --> B{本地存在access_token?}
+    B -->|无| C[302 重定向至<br>https://oidc.neibuguanli.cn/connect/authorize?...<br>携带client_id=ProjectAdmin_Vben_App<br>&redirect_uri=https://vue.neibuguanli.cn/signin-oidc<br>&response_type=code id_token<br>&scope=openid profile roles email phone Admin<br>&__tenant=租户ID<br>&ui_locales=zh-CN]
+    B -->|有| D[携带令牌调用API]
+
+    C --> E[授权中心登录页<br>https://oidc.neibuguanli.cn/Account/Login]
+    E --> F[用户填写账密/租户/语言]
+    F --> G[POST /Account/Login]
+    G --> H[验证通过]
+    H --> I[302 重定向回<br>https://vue.neibuguanli.cn/signin-oidc<br>form_post 方式<br>携带code & id_token & state]
+    I --> J[Vue后端接收<br>id_token & code & state]
+    J --> K[验证state]
+    K --> L[保存id_token到cookie/local]
+    L --> M[使用code换access_token<br>POST /connect/token<br>Header: Content-Type: application/x-www-form-urlencoded<br>Body: grant_type=authorization_code<br>&code=CODE<br>&client_id=ProjectAdmin_Vben_App<br>&code_verifier=xxx]
+    M --> N[得到 access_token<br>refresh_token]
+    N --> O[保存access_token到cookie/local]
+    O --> D
+    
+    D --> P[请求API<br>https://api.neibuguanli.cn/...]
+    P --> Q[请求头携带<br>Authorization: Bearer access_token<br>__tenant: 租户ID<br>Accept-Language: zh-CN]
+    Q --> R{令牌有效?}
+    R -->|有效| S[返回200业务数据]
+    R -->|过期| T[用refresh_token换AT<br>POST /connect/token<br>grant_type=refresh_token<br>&refresh_token=RT]
+    T --> U[更新access_token]
+    U --> D
+    
+    V[用户点击注销] --> W[清除本地token]
+    W --> X[302 跳转<br>https://oidc.neibuguanli.cn/connect/logout?<br>id_token_hint=IT<br>&post_logout_redirect_uri=https://vue.neibuguanli.cn/signout-callback-oidc<br>&state=xyz]
+    X --> Y[授权中心清除会话]
+    Y --> Z[302 回到<br>https://vue.neibuguanli.cn/signout-callback-oidc?state=xyz]
+    Z --> A
+```
+</pre>
+```
 
 #### 4、自有登录页与oidc授权码流的对比
 
@@ -61,15 +136,7 @@ const oAuthConfig = {
 | 刷新/退出     | 标准 `/connect/token` & `/connect/logout`    | 自定义 `/api/account/refresh` & `/logout` |
 | 多租户/多语言 | 通过 authorize URL 参数传递                  | 通过 login/refresh 请求体 Header 传递     |
 
-#### 5、自有登录页面的认证流程
-
-点击全屏按钮查看
-
-![img](https://cdn.nlark.com/yuque/__mermaid_v3/3ce010609afd3cf8b62531aa11e8e0e2.svg)
-
-完成上述的登录授权之后，再接入以下菜单的功能
-
-#### 
+#### 5、接入菜单
 
 ```typescript
 apps/vben5/src
