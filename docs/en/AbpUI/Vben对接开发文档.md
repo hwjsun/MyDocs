@@ -18,7 +18,6 @@ Vue-Vben-Admin v5（域名：https://vben.neibuguanli.cn），完整对接ABP后
 
 #### 1、用户认证流程
 
-<pre>
 ```mermaid
 graph TD
     用户 -->|①需要认证| Vben后台站点
@@ -29,12 +28,12 @@ graph TD
     认证服务Oidc站点 -->|ID和访问令牌| Vben后台站点
     Vben后台站点 -->|验证| HTTPAPI
     HTTPAPI -->|数据读写| 数据库
-    ```
-</pre>
+```
+
 
 #### 2、前端交互流程
 
-<pre>
+
 ```mermaid
 graph TD
     A(首次访问 https://vue.neibuguanli.cn)
@@ -48,45 +47,26 @@ graph TD
     G --> H(前端用授权码换access_token)
     H --> I(存入localStorage与cookie)
     I --> D
-    
+
     D --> J(调用业务API)
     J --> K(自动带Authorization Bearer token 租户头 语言头)
     K --> L{返回状态}
     L -- 200 --> M(渲染页面)
     L -- 401 --> N(用refresh_token换新token)
     N --> J
-    
+
     O(点击退出) --> P(清除本地token)
     P --> Q(跳转登录中心注销)
     Q --> R(返回首页)
     R --> A
-    ```
-</pre>
-
+```
 
 
 #### 3、前端交互细节
 
 注意：vben站点需要传递clientId给授权站点（clientId：ProjectAdmin_Vben_App）
 
-```typescript
-vben站点在向授权中心请求时，传递的clientId，设置为 ProjectAdmin_Vben_App
-const oAuthConfig = {
-  issuer: 'https://oidc.neibuguanli.cn/',
-  redirectUri: baseUrl,
-  clientId: 'ProjectAdmin_Vben_App',
-  responseType: 'code',
-  scope: 'offline_access ProjectAdmin',
-  requireHttps: true,
-  impersonation: {
-    tenantImpersonation: true,
-    userImpersonation: true,
-  }
-};
-```
-
-<pre>
-```mermaid
+````mermaid
 graph TD
     %% 颜色标记：绿色=成功，红色=失败/异常，灰色=可选
     A[用户访问 https://vue.neibuguanli.cn] --> B{本地存在access_token?}
@@ -105,7 +85,7 @@ graph TD
     M --> N[得到 access_token<br>refresh_token]
     N --> O[保存access_token到cookie/local]
     O --> D
-    
+
     D --> P[请求API<br>https://api.neibuguanli.cn/...]
     P --> Q[请求头携带<br>Authorization: Bearer access_token<br>__tenant: 租户ID<br>Accept-Language: zh-CN]
     Q --> R{令牌有效?}
@@ -113,15 +93,16 @@ graph TD
     R -->|过期| T[用refresh_token换AT<br>POST /connect/token<br>grant_type=refresh_token<br>&refresh_token=RT]
     T --> U[更新access_token]
     U --> D
-    
+
     V[用户点击注销] --> W[清除本地token]
     W --> X[302 跳转<br>https://oidc.neibuguanli.cn/connect/logout?<br>id_token_hint=IT<br>&post_logout_redirect_uri=https://vue.neibuguanli.cn/signout-callback-oidc<br>&state=xyz]
     X --> Y[授权中心清除会话]
     Y --> Z[302 回到<br>https://vue.neibuguanli.cn/signout-callback-oidc?state=xyz]
     Z --> A
 ```
-</pre>
-```
+````
+
+
 
 #### 4、自有登录页与oidc授权码流的对比
 
