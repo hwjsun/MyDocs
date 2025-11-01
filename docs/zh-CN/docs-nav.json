@@ -1,15 +1,15 @@
 {
   "items": [
     {
-      "text": "Get Started",
+      "text": "开始",
       "items": [
         {
-          "text": "Overview",
+          "text": "范围",
           "path": "index.md",
           "isIndex": true
         },
         {
-          "text": "Single Layer Web Application",
+          "text": "工具",
           "path": "tools2.md"
         }
       ]
