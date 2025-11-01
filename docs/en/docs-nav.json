@@ -3,46 +3,46 @@
   "displayName": "Abp帮助",
   "items": [
     {
-      "text": "Abp Framework",
-      "path": "Abp Framework",
+      "text": "AbpFramework",
+      "path": "AbpFramework",
       "items": [
         {
-          "text": "ABP 具有单独数据库的多租户",
-          "path": "Abp Framework/ABP 具有单独数据库的多租户.md"
-        },
-        {
-          "text": "ABP 框架的应用服务与域服务",
-          "path": "Abp Framework/ABP 框架的应用服务与域服务.md"
-        },
-        {
-          "text": "ABP 框架和 Quartz 构建持久性后台作业",
-          "path": "Abp Framework/ABP 框架和 Quartz 构建持久性后台作业.md"
-        },
-        {
           "text": "ABP核心授权系统",
-          "path": "Abp Framework/ABP核心授权系统.md"
+          "path": "AbpFramework/ABP核心授权系统.md"
+        },
+        {
+          "text": "ABP具有单独数据库的多租户",
+          "path": "AbpFramework/ABP具有单独数据库的多租户.md"
+        },
+        {
+          "text": "ABP框架的应用服务与域服务",
+          "path": "AbpFramework/ABP框架的应用服务与域服务.md"
+        },
+        {
+          "text": "ABP框架和Quartz构建持久性后台作业",
+          "path": "AbpFramework/ABP框架和Quartz构建持久性后台作业.md"
         },
         {
           "text": "AutoMapper迁移到Mapperly",
-          "path": "Abp Framework/AutoMapper迁移到Mapperly.md"
+          "path": "AbpFramework/AutoMapper迁移到Mapperly.md"
         }
       ]
     },
     {
-      "text": "Abp UI",
-      "path": "Abp UI",
+      "text": "AbpUI",
+      "path": "AbpUI",
       "items": [
         {
           "text": "Angular + ABP",
-          "path": "Abp UI/Angular + ABP.md"
+          "path": "AbpUI/Angular + ABP.md"
         },
         {
           "text": "编译",
-          "path": "Abp UI/Arco + ABP.md"
+          "path": "AbpUI/Arco + ABP.md"
         },
         {
           "text": "编译",
-          "path": "Abp UI/Vben + ABP.md"
+          "path": "AbpUI/Vben + ABP.md"
         }
       ]
     }
