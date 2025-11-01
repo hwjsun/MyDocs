@@ -1,3 +1,4 @@
+<<<<<<< .mine
 {
   "parameters": {
     "abp_version": "8.3.0",
@@ -7,3 +8,14 @@
     "github_repo": "https://github.com/hwjsun/MyDocs"
   }
 }
+=======
+{
+  "parameters": {
+    "abp_version": "8.3.0",
+    "dotnet_version": "8.0",
+    "my_project_name": "MyDocs",
+    "current_year": "2025",
+    "github_repo": "https://github.com/hwjsun/MyDocs"
+  }
+}
+>>>>>>> .theirs

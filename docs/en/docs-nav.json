@@ -1,18 +1,50 @@
-{
-  "items": [
-    {
-      "text": "Get Started",
-      "items": [
-        {
-          "text": "Overview",
-          "path": "index.md",
-          "isIndex": true
-        },
-        {
-          "text": "Single Layer Web Application",
-          "path": "tools2.md"
-        }
-      ]
-    }
-  ]
-}
+﻿[
+  {
+    "slug": "index",
+    "title": "Home"
+  },
+  {
+    "slug": "Abp Framework",
+    "title": "Abp Framework",
+    "children": [
+      {
+        "slug": "Abp Framework/ABP 具有单独数据库的多租户",
+        "title": "ABP 具有单独数据库的多租户"
+      },
+      {
+        "slug": "Abp Framework/ABP 框架的应用服务与域服务",
+        "title": "ABP 框架的应用服务与域服务"
+      },
+      {
+        "slug": "Abp Framework/ABP 框架和 Quartz 构建持久性后台作业",
+        "title": "ABP 框架和 Quartz 构建持久性后台作业"
+      },
+      {
+        "slug": "Abp Framework/ABP核心授权系统",
+        "title": "ABP核心授权系统"
+      },
+      {
+        "slug": "Abp Framework/AutoMapper迁移到Mapperly",
+        "title": "AutoMapper迁移到Mapperly"
+      }
+    ]
+  },
+  {
+    "slug": "Abp UI",
+    "title": "Abp UI",
+    "children": [
+      {
+        "slug": "Abp UI/Angular + ABP",
+        "title": "Angular + ABP"
+      },
+      {
+        "slug": "Abp UI/Arco + ABP",
+        "title": "编译"
+      },
+      {
+        "slug": "Abp UI/Vben + ABP",
+        "title": "编译"
+      }
+    ]
+  }
+]
