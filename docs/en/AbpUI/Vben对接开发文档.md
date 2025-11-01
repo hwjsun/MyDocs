@@ -14,8 +14,6 @@ Vue-Vben-Admin v5（域名：https://vben.neibuguanli.cn），完整对接ABP后
 
 #### 6. 主题/布局/锁屏/404/500 等走查
 
-纯前端路由即可，拿到  ?code=xxx  后立刻用  code + code_verifier  换 token：
-
 ```typescript
 const params = new URLSearchParams(location.search);
 const code = params.get('code');

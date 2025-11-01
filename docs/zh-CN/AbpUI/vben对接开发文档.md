@@ -14,6 +14,32 @@ Vue-Vben-Admin v5（域名：https://vben.neibuguanli.cn），完整对接ABP后
 
 #### 6. 主题/布局/锁屏/404/500 等走查
 
+```typescript
+const params = new URLSearchParams(location.search);
+const code = params.get('code');
+const verifier = localStorage.getItem('code_verifier');
+
+const body = new URLSearchParams({
+  grant_type: 'authorization_code',
+  client_id: 'XShop_Arco',
+  code: code!,
+  redirect_uri: 'https://arco.f2b2c.shop/signin-oidc',
+  code_verifier: verifier!
+});
+
+fetch('https://openid.f2b2c.shop/connect/token', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body
+})
+.then(r => r.json())
+.then(tok => {
+  localStorage.setItem('access_token', tok.access_token);
+  localStorage.setItem('refresh_token', tok.refresh_token);
+  history.replace('/');   // 回到首页
+});
+```
+
 ### 二、前端与授权站点和API站点的交互
 
 #### 1、用户认证流程
