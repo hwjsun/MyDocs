@@ -3,12 +3,12 @@
     {
       "DisplayName" : "English",
       "Code" : "en",
-      "IsDefault": true
+      "IsDefault": false
     },
 {
       "DisplayName" : "中文",
       "Code" : "zh-CN",
-      "IsDefault": false
+      "IsDefault": true
     }
 
   ]
